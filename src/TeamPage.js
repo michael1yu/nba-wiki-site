@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 const requestUrl = "https://nbaspringboot.herokuapp.com/query_current_players";
-const proxyurl = "https://cors-anywhere.herokuapp.com/"
+const proxyUrl = "https://m-y-cors-proxy.herokuapp.com/";
 var name;
 class TeamPage extends React.Component {
     constructor(props) {
@@ -21,37 +21,32 @@ class TeamPage extends React.Component {
 
     componentDidMount() {
         name = this.props.match.params.team;
-        axios.get(proxyurl + requestUrl, {
+        axios.get(proxyUrl + requestUrl, {
             params: {
                 team: name,
                 current: "true"
-            },
-            headers: {
-                header: "Access-Control-Allow-Origin: *"
             }
-        }
-        ).then(
-            (response) => {
-                var output = response.data;
-                this.setState({ players: response.data.players });
+        }).then(
+            response => {
+                this.setState({ players: response.data.players ? response.data.players : [] });
             }
         );
+        
     }
 
-    async componentWillReceiveProps(newProps) {
+    componentWillReceiveProps(newProps) {
         name = newProps.match.params.team;
-        const { data } = await axios.get(proxyurl + requestUrl, {
+        axios.get(proxyUrl + requestUrl, {
             params: {
                 team: name,
                 current: "true"
-            },
-            headers: {
-                header: "Access-Control-Allow-Origin: *"
             }
-        }
+        }).then(
+            response => {
+                this.setState({ players: response.data.players ? response.data.players : []});
+            }
         );
-        this.setState({ players: data.players });
-
+        
     }
 
     render() {
@@ -60,11 +55,11 @@ class TeamPage extends React.Component {
                 <div>
                     <h1>{this.props.match.params.team}</h1>
                     <ul>
-                        {this.state.players.map(player => <li><NavLink to = {"/team/" + this.props.match.params.team + "/player/" + player.id}>{player.name}</NavLink></li>)}
+                        {this.state.players.map(player => <li><NavLink to={"/team/" + this.props.match.params.team + "/player/" + player.id}>{player.name}</NavLink></li>)}
                     </ul>
                 </div>
                 <div>
-                    <Route path = {"/team/" + this.props.match.params.team + "/player/:id"} component = {PlayerPage}/>
+                    <Route path={"/team/" + this.props.match.params.team + "/player/:id"} component = {PlayerPage} />
                 </div>
             </HashRouter>
 

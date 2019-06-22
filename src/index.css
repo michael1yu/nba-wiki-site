@@ -20,8 +20,6 @@ code {
     monospace;
 }
 
-
-
 ul.header {
   display: inline-flex;
   justify-content: space-between;
@@ -37,6 +35,7 @@ ul.header {
 }
 
 ul.header li {
+  display: inline-block;
   list-style-type: none;
   margin: auto;
 }

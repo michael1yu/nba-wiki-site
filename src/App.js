@@ -74,21 +74,19 @@ const abbreviations = [
 class App extends React.Component {
 
     render() {
-        
-
         return (
             <HashRouter>
                 <div className="page">
                     <div className="navBar">
                         <ul className="header">
                             <li><NavLink to="/">Home</NavLink></li>
-                            {teams.map((team, index) => <li><NavLink to = {"/team/" + team}>{abbreviations[index]}</NavLink></li>)}
+                            {teams.map((team, index) => <li><NavLink to={"/team/" + team}>{abbreviations[index]}</NavLink></li>)}
                         </ul>
                     </div>
 
                     <div className="content">
-                        <Route exact path="/" component = {Home} />
-                        <Route exact path="/team/:team" component = {TeamPage} />
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/team/:team" component={TeamPage} />
                     </div>
                 </div>
             </HashRouter>
