@@ -6,7 +6,8 @@ const requestStatsUrl = "https://nbaspringboot.herokuapp.com/get_player_stats";
 const proxyUrl = "https://m-y-cors-proxy.herokuapp.com/";
 var player_id;
 
-const source = axios.CancelToken.source();
+const CancelToken = axios.CancelToken;
+let cancel;
 
 class PlayerPage extends React.Component {
     constructor(props) {
@@ -17,40 +18,36 @@ class PlayerPage extends React.Component {
         stats: []
     };
 
-    componentWillUnmount(){
-        source.cancel('Operation canceled by the user.');
+    componentWillUnmount() {
+        cancel('Operation canceled by the user.');
     }
 
 
-    async componentDidMount() {
-        player_id = this.props.match.params.id;
-        const firstResponse = await (
-                axios.get(proxyUrl + requestTeamUrl, {
-                    cancelToken: source.token,
-                    params: {
-                        id: player_id
-                    }
-                })
-            );
-        const secondResponse = await (
-            axios.get(proxyUrl + requestStatsUrl, {
-                cancelToken: source.token,
-                params: {
-                    team: firstResponse.data.team,
-                    id: player_id
-                }
-            })
+    componentDidMount() {
+        player_id = this.props.id;
+        axios.get(proxyUrl + requestStatsUrl, {
+            cancelToken: new CancelToken(function executor(c) {
+                // An executor function receives a cancel function as a parameter
+                cancel = c;
+              }),
+            params: {
+                team: this.props.team,
+                id: player_id
+            }
+        }
+        ).then(
+            response => {
+                this.setState({ stats : response.data ? response.data : [] });
+            }
         );
-        this.setState({stats: secondResponse.data});
+
     }
 
     render() {
         return (
             <div>
-                <h1>Hello</h1>
+                <h1>{this.state.stats.games_played}</h1>
             </div>
-
-
         );
     }
 }

@@ -4,8 +4,10 @@ import Home from './Home';
 import {
     Route,
     NavLink,
-    HashRouter
+    HashRouter,
+    Switch
 } from "react-router-dom";
+import PlayerPage from './PlayerPage';
 
 const teams = [
     "Atlanta Hawks",
@@ -85,8 +87,11 @@ class App extends React.Component {
                     </div>
 
                     <div className="content">
-                        <Route exact path="/" component={Home} />
-                        <Route exact path="/team/:team" component={TeamPage} />
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route exact path="/team/:team" component={TeamPage} />
+                            <Route path={"/team/:team/player/:id"} render = {(props) => <TeamPage {...props} playerTeam = {props.match.params.team} />} />
+                        </Switch>
                     </div>
                 </div>
             </HashRouter>

@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import PlayerPage from './PlayerPage';
 import {
-    Route,
     NavLink,
     HashRouter
 } from "react-router-dom";
@@ -10,6 +9,8 @@ import {
 const requestUrl = "https://nbaspringboot.herokuapp.com/query_current_players";
 const proxyUrl = "https://m-y-cors-proxy.herokuapp.com/";
 var name;
+const CancelToken = axios.CancelToken;
+let cancel;
 class TeamPage extends React.Component {
     constructor(props) {
         super(props);
@@ -22,6 +23,9 @@ class TeamPage extends React.Component {
     componentDidMount() {
         name = this.props.match.params.team;
         axios.get(proxyUrl + requestUrl, {
+            cancelToken: new CancelToken(function executor(c){
+                cancel = c;
+            }),
             params: {
                 team: name,
                 current: "true"
@@ -37,6 +41,9 @@ class TeamPage extends React.Component {
     componentWillReceiveProps(newProps) {
         name = newProps.match.params.team;
         axios.get(proxyUrl + requestUrl, {
+            cancelToken: new CancelToken(function executor(c){
+                cancel = c;
+            }),
             params: {
                 team: name,
                 current: "true"
@@ -49,21 +56,29 @@ class TeamPage extends React.Component {
         
     }
 
-    render() {
-        return (
-            <HashRouter>
-                <div>
-                    <h1>{this.props.match.params.team}</h1>
-                    <ul>
-                        {this.state.players.map(player => <li><NavLink to={"/team/" + this.props.match.params.team + "/player/" + player.id}>{player.name}</NavLink></li>)}
-                    </ul>
-                </div>
-                <div>
-                    <Route path={"/team/" + this.props.match.params.team + "/player/:id"} component = {PlayerPage} />
-                </div>
-            </HashRouter>
+    componentWillUnmount(){
+        cancel('Operation canceled by the user.');
+    }
 
-        );
+    render() {
+        if(this.props.playerTeam){
+            return (
+                <PlayerPage id = {this.props.match.params.id} team = {this.props.playerTeam} />
+            )
+        } else {
+            return (
+                <HashRouter>
+                    <div>
+                        <h1>{this.props.match.params.team}</h1>
+                        <ul>
+                            {this.state.players.map((player) => <li><NavLink to={"/team/" + this.props.match.params.team + "/player/" + player.id}>{player.name}</NavLink></li>)}
+                        </ul>
+                    </div>
+                </HashRouter>
+    
+            );
+        }
+        
     }
 }
 export default TeamPage;
