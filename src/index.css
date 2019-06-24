@@ -48,3 +48,16 @@ ul.header li a {
   margin: 0;
 }
 
+div.playerInfo ul {
+  display: flex;
+  flex-direction: row;
+}
+
+div.playerInfo ul li {
+  display: block;
+}
+
+div.playerStats ul li {
+  display: block;
+}
+
