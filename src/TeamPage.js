@@ -67,15 +67,12 @@ class TeamPage extends React.Component {
             )
         } else {
             return (
-                <HashRouter>
                     <div>
                         <h1>{this.props.match.params.team}</h1>
                         <ul>
                             {this.state.players.map((player) => <li><NavLink to={"/team/" + this.props.match.params.team + "/player/" + player.id}>{player.name}</NavLink></li>)}
                         </ul>
                     </div>
-                </HashRouter>
-    
             );
         }
         

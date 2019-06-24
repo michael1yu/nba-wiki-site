@@ -77,25 +77,21 @@ class App extends React.Component {
 
     render() {
         return (
-            <HashRouter>
-                <div className="page">
-                    <div className="navBar">
-                        <ul className="header">
-                            <li><NavLink to="/">Home</NavLink></li>
-                            {teams.map((team, index) => <li><NavLink to={"/team/" + team}>{abbreviations[index]}</NavLink></li>)}
-                        </ul>
-                    </div>
-
-                    <div className="content">
-                        <Switch>
-                            <Route exact path="/" component={Home} />
-                            <Route exact path="/team/:team" component={TeamPage} />
-                            <Route path={"/team/:team/player/:id"} render = {(props) => <TeamPage {...props} playerTeam = {props.match.params.team} />} />
-                        </Switch>
-                    </div>
+            <div className="page">
+                <div className="navBar">
+                    <ul className="header">
+                        <li><NavLink to="/">Home</NavLink></li>
+                        {teams.map((team, index) => <li><NavLink to={"/team/" + team}>{abbreviations[index]}</NavLink></li>)}
+                    </ul>
                 </div>
-            </HashRouter>
-
+                <div className="content">
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/team/:team" component={TeamPage} />
+                        <Route path="/team/:team/player/:id" render={(props) => <TeamPage {...props} playerTeam={props.match.params.team} />} />
+                    </Switch>
+                </div>
+            </div>
         );
     }
 }
