@@ -9,10 +9,14 @@ body {
 
 body.welcome{
   text-align: center;
+  color: white;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
 
 body.welcome h1{
-  font-size: 500%;
+  font-size: x-large;
+  color: white;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
 
 code {
@@ -20,44 +24,99 @@ code {
     monospace;
 }
 
+html {
+  background-color: black;
+}
+
+div.page {
+  margin: 0;
+  background-color: black;
+  min-height: 100%;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+}
+
+div.navBar {
+  background-color: black;
+  margin: 0;
+  padding: 1.5%;
+}
+
 ul.header {
-  display: inline-flex;
-  justify-content: space-between;
+  display: inline;
   width: 100%;
-  flex-direction: row;
   align-items: center;
+  padding-inline-start: 0%;
   margin-top: 0;
-  padding-top: .5%;
-  padding-bottom: .5%;
-  padding-left: 0%;
-  padding-right: 0%;
-  background-color: bisque;
 }
 
 ul.header li {
-  display: inline-block;
+  display: inline;
   list-style-type: none;
   margin: auto;
+  padding: 1%;
 }
 
 ul.header li a {
   font-weight: bold;
   text-decoration: none;
   display: inline-block;
-  color: black;
+  color: white;
   margin: 0;
 }
 
+div.teamList ul li {
+  display: block;
+}
+
+div.teamPage h1 {
+  color: white;
+}
+
+div.teamPage ul li a{
+  color: white;
+  text-decoration: none;
+}
+
+div.teamList ul li a {
+  text-decoration: none;
+  color: white;
+}
+
 div.playerInfo ul {
-  display: flex;
-  flex-direction: row;
+  display: inline;
+  width: 100%;
+  margin-top: 0;
 }
 
 div.playerInfo ul li {
-  display: block;
+  display: inline-block;
+  margin: auto;
+  color: white;
+  white-space: nowrap;
+  margin: 1%;
+}
+
+div.playerStats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: beige;
+}
+
+div.playerStats .Collapsible{
+    cursor: pointer;
 }
 
 div.playerStats ul li {
   display: block;
 }
 
+div.player h1{
+  color: white;
+  text-align: center;
+}
+
+div.teamList {
+  margin: 0;
+  padding: 0;
+}
