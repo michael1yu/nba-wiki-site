@@ -4,7 +4,6 @@ import Collapsible from 'react-collapsible';
 
 const requestStatsUrl = "https://nbaspringboot.herokuapp.com/get_player_stats";
 const requestInfoUrl = "https://nbaspringboot.herokuapp.com/get_player_info";
-const proxyUrl = "https://m-y-cors-proxy.herokuapp.com/";
 var player_id;
 
 const CancelToken = axios.CancelToken;
@@ -29,7 +28,7 @@ class PlayerPage extends React.Component {
     }
 
     axiosInfoCall() {
-        return axios.get(proxyUrl + requestInfoUrl, {
+        return axios.get(requestInfoUrl, {
             cancelToken: new CancelToken(function executor(c) {
                 // An executor function receives a cancel function as a parameter
                 cancel = c;
@@ -42,7 +41,7 @@ class PlayerPage extends React.Component {
     }
 
     axiosStatsCall() {
-        return axios.get(proxyUrl + requestStatsUrl, {
+        return axios.get(requestStatsUrl, {
             cancelToken: new CancelToken(function executor(c) {
                 cancel = c;
             }),

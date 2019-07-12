@@ -38,7 +38,6 @@ const teams = [
     "Utah Jazz",
     "Washington Wizards"];
 const requestUrl = "https://nbaspringboot.herokuapp.com/query_current_players";
-const proxyUrl = "https://m-y-cors-proxy.herokuapp.com/";
 var name;
 const CancelToken = axios.CancelToken;
 let cancel;
@@ -53,7 +52,7 @@ class TeamPage extends React.Component {
 
     componentDidMount() {
         name = this.props.match.params.team;
-        axios.get(proxyUrl + requestUrl, {
+        axios.get(requestUrl, {
             cancelToken: new CancelToken(function executor(c) {
                 cancel = c;
             }),
@@ -71,7 +70,7 @@ class TeamPage extends React.Component {
 
     componentWillReceiveProps(newProps) {
         name = newProps.match.params.team;
-        axios.get(proxyUrl + requestUrl, {
+        axios.get(requestUrl, {
             cancelToken: new CancelToken(function executor(c) {
                 cancel = c;
             }),
