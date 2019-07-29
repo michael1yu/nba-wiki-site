@@ -5,7 +5,7 @@ class Home extends React.Component{
         return (
             <body className = "welcome">
                 <h1>
-                    Welcome to NBA Wiki
+                    Welcome to Nothing But Stats
                 </h1>
                 <h2>
                     A site for finding NBA statistics
