@@ -1,15 +1,18 @@
 import React from 'react';
 import axios from 'axios';
 import Collapsible from 'react-collapsible';
+import { matchPath } from "react-router";
 
 const requestStatsUrl = "https://nothingbutstatsapi.herokuapp.com/get_player_stats";
 const requestInfoUrl = "https://nothingbutstatsapi.herokuapp.com/get_player_info";
+
 var player_id;
 
 const CancelToken = axios.CancelToken;
 let cancel;
 let playerStats;
 let playerInfo;
+
 
 class PlayerPage extends React.Component {
     constructor(props) {
@@ -18,9 +21,15 @@ class PlayerPage extends React.Component {
         this.axiosInfoCall = this.axiosInfoCall.bind(this);
     }
 
+    
+
     state = {
         stats: [],
         info: [],
+        match: matchPath(this.props.location.pathname, {
+            // You can share this string as a constant if you want
+            path: "/team/:team/player/:id"
+          })
     };
 
     componentWillUnmount() {
@@ -34,7 +43,7 @@ class PlayerPage extends React.Component {
                 cancel = c;
             }),
             params: {
-                team: this.props.team,
+                team: this.state.match.params.team,
                 id: player_id
             }
         });
@@ -46,7 +55,7 @@ class PlayerPage extends React.Component {
                 cancel = c;
             }),
             params: {
-                team: this.props.team,
+                team: this.state.match.params.team,
                 id: player_id
             }
         });
@@ -54,7 +63,7 @@ class PlayerPage extends React.Component {
 
 
     componentDidMount() {
-        player_id = this.props.id;
+        player_id = this.state.match.params.id;
         let self = this;
         axios.all([
             this.axiosStatsCall(),

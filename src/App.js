@@ -1,12 +1,14 @@
 import React from 'react';
 import TeamPage from './TeamPage';
 import Home from './Home';
+import PlayerListPage from './PlayerListPage';
 import {
     Route,
     NavLink,
     HashRouter,
     Switch
 } from "react-router-dom";
+import PlayerPage from './PlayerPage';
 
 class App extends React.Component {
 
@@ -22,9 +24,9 @@ class App extends React.Component {
                 <div className="content">
                     <Switch>
                         <Route exact path="/" component={Home} />
-                        <Route exact path="/team" render={(props) => <TeamPage {...props} teamList="true" />} />
-                        <Route exact path="/team/:team" component={TeamPage} />
-                        <Route path="/team/:team/player/:id" render={(props) => <TeamPage {...props} playerTeam={props.match.params.team} />} />
+                        <Route exact path="/team" component={TeamPage} />
+                        <Route exact path="/team/:team" component={PlayerListPage} />
+                        <Route path="/team/:team/player/:id" component={PlayerPage} />
                     </Switch>
                 </div>
             </div>
