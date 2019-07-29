@@ -37,7 +37,7 @@ const teams = [
     "Toronto Raptors",
     "Utah Jazz",
     "Washington Wizards"];
-const requestUrl = "https://nbaspringboot.herokuapp.com/query_current_players";
+const requestUrl = "https://nothingbutstatsapi.herokuapp.com/query_current_players";
 var name;
 const CancelToken = axios.CancelToken;
 let cancel;

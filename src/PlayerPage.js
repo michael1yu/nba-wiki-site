@@ -2,8 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Collapsible from 'react-collapsible';
 
-const requestStatsUrl = "https://nbaspringboot.herokuapp.com/get_player_stats";
-const requestInfoUrl = "https://nbaspringboot.herokuapp.com/get_player_info";
+const requestStatsUrl = "https://nothingbutstatsapi.herokuapp.com/get_player_stats";
+const requestInfoUrl = "https://nothingbutstatsapi.herokuapp.com/get_player_info";
 var player_id;
 
 const CancelToken = axios.CancelToken;
