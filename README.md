@@ -1,4 +1,4 @@
-# [Nothing But Stats Website](nothingbutstatssite.herokuapp.com)
+# [Nothing But Stats Website](https://nothingbutstatssite.herokuapp.com)
 
 # Description
 This is a project that is meant to serve as a means to experiment with full-stack development. The NBA data being displayed in the site is being served by the NothingButStats REST API (nothingbutstatsapi.herokuapp.com).
