@@ -5,5 +5,5 @@ This is a project that is meant to serve as a means to experiment with full-stac
 The website itself was built using ReactJs and has a corresponding mobile app built using React Native.
 
 
-#Disclaimer
+# Disclaimer
 The data displayed in the site is likely to be outdated and is only up to date as of the 2018-2019 NBA season.
